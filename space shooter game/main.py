@@ -1,35 +1,37 @@
 import pygame
 from player import Player
-from player import Direction
 
+# Pygame Setup
 pygame.init()
-bounds = (300, 300)
+bounds = (800, 600)
 window = pygame.display.set_mode(bounds)
 pygame.display.set_caption("!Space Fighters!")
+clock = pygame.time.Clock()
 
-block_size = 20
-player = Player(block_size, bounds)
+# Global Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+# Program Variables
+player = Player(400, 575, 25, 25, WHITE)
+
 done = False
 
 while not done:
-    pygame.time.delay(100)
-
+    #Event Listener
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.steer(Direction.LEFT)
-        elif keys[pygame.K_RIGHT]:
-            player.steer(Direction.RIGHT)
-        elif keys[pygame.K_UP]:
-            player.steer(Direction.UP)
-        elif keys[pygame.K_DOWN]:
-            player.steer(Direction.DOWN)
-        
-    player.move()
 
-    window.fill((0, 0, 0))
-    player.draw(pygame, window)
-    pygame.display.update()
+    # Logic
+    player.move()
+        
+    # Draw
+    window.fill(BLACK)
+    player.draw(window)
+
+    # Update Screen
+    pygame.display.flip()
+    clock.tick(20)
+
+pygame.quit()
