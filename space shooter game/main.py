@@ -23,7 +23,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    # Logic
+    # Logic 
     player.move()
         
     # Draw
