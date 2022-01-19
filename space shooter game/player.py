@@ -21,8 +21,8 @@ class Player:
                 self.x = 775
         elif keys[pygame.K_UP]:
             self.y += -5
-            if self.y < 0:
-                self.y = 0
+            if self.y < 380:
+                self.y = 380
         elif keys[pygame.K_DOWN]:
             self.y += 5
             if self.y > 575:
