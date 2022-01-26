@@ -1,6 +1,5 @@
 import pygame
 
-
 class Enemy:
     def __init__(self, initX, initY, deltaX, deltaY, initW, initH, initColor):
         self.x = initX
@@ -22,6 +21,7 @@ class Enemy:
                 self.dy *= -1
         elif self.y > 350:
                 self.dy *= -1
+
 
     def draw(self, window):
         pygame.draw.rect(window, self.color, [self.x, self.y, self.w, self.h])

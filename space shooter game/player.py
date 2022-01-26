@@ -10,7 +10,6 @@ class Player:
 
     def move(self):
         keys = pygame.key.get_pressed()
-        keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.x += -5
             if self.x < 0:

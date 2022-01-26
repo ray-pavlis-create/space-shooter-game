@@ -1,8 +1,9 @@
 import pygame
 import random
-from player import Player
-from enemy import Enemy
 from border import Border
+from player import Player
+from bullet import Bullet
+from enemy import Enemy
 
 # Pygame Setup
 pygame.init()
@@ -20,6 +21,7 @@ GRAY = (48, 48, 48)
 # Program Variables
 border = Border(0, 380, 800, 1, GRAY)
 player = Player(400, 575, 25, 25, WHITE)
+bullets = []
 enemies = []
 for i in range(10):
     enemy = Enemy(random.randint(5, 750), random.randint(5, 350), random.randint(-5, 6), random.randint(-5, 6), 25, 25, RED)
@@ -32,18 +34,26 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        if  event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                bullet = Bullet(player.x, player.y, -5, 10, 10, WHITE)
+                bullets.append(bullet)
 
     # Logic 
     player.move()
+    for bullet in bullets:
+        bullet.move()
     for enemy in enemies:
         enemy.move()
-        
+          
     # Draw
     window.fill(BLACK)
+    border.draw(window)
     player.draw(window)
+    for bullet in bullets:
+        bullet.draw(window)
     for enemy in enemies:
         enemy.draw(window)
-    border.draw(window)
 
     # Update Screen
     pygame.display.flip()
