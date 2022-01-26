@@ -12,5 +12,6 @@ class Bullet:
     def move(self):
         self.y += self.dy
 
+
     def draw(self, window):
         pygame.draw.rect(window, self.color, [self.x, self.y, self.w, self.h])

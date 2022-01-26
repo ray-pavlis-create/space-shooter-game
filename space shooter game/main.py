@@ -27,6 +27,23 @@ for i in range(10):
     enemy = Enemy(random.randint(5, 750), random.randint(5, 350), random.randint(-5, 6), random.randint(-5, 6), 25, 25, RED)
     enemies.append(enemy)
 
+# Collision detection
+def rect_collide(rect1, rect2):
+    le1 = rect1.x
+    re1 = rect1.x + rect1.w
+    te1 = rect1.y
+    be1 = rect1.y + rect1.h
+
+    le2 = rect2.x
+    re2 = rect2.x + rect2.w
+    te2 = rect2.y
+    be2 = rect2.y + rect2.h
+
+    if le1 < re2 and re1 > le2 and be1 > te2 and te1 < be2:
+        return True
+    else:
+        return False
+
 done = False
 
 while not done:
@@ -45,7 +62,14 @@ while not done:
         bullet.move()
     for enemy in enemies:
         enemy.move()
-          
+
+    for i in range(len(bullets)):
+        for j in range(len(enemies) - 1, -1, -1):
+            if rect_collide(bullets[i], enemies[j]):
+                enemies.pop(j)
+                enemy = Enemy(random.randint(5, 750), random.randint(5, 350), random.randint(-5, 6), random.randint(-5, 6), 25, 25, RED)
+                enemies.append(enemy)
+        
     # Draw
     window.fill(BLACK)
     border.draw(window)
